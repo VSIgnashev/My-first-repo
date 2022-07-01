@@ -1,0 +1,14 @@
+﻿  VVV.cpp
+C:\Users\mrbig\source\repos\VVV\VVV\Viktor.h(53,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\mrbig\source\repos\VVV\VVV\Viktor.h(51): message : во время компиляции функции-члена класс шаблон "Viktor<int>::Viktor(const std::initializer_list<T> &)"
+          with
+          [
+              T=int
+          ]
+C:\Users\mrbig\source\repos\VVV\VVV\VVV.cpp(39): message : выполняется компиляция ссылки на экземпляр шаблон функции "Viktor<int>::Viktor(const std::initializer_list<T> &)"
+          with
+          [
+              T=int
+          ]
+C:\Users\mrbig\source\repos\VVV\VVV\VVV.cpp(39): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "Viktor<int>"
+  VVV.vcxproj -> C:\Users\mrbig\source\repos\VVV\x64\Debug\VVV.exe
