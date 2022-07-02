@@ -4,6 +4,8 @@
 #include <cassert>
 #include <initializer_list>
 #include <cstddef>
+#include <string>
+#include <stdexcept>
 
 
 template <typename T>
@@ -12,8 +14,8 @@ class Viktor {
 public:
 	std::unique_ptr<unsigned char[]> m_buffer;
 	T* m_nextElement=nullptr;
-	int m_numberOfElements=0;
-	int m_capacity=0;
+	std::size_t m_numberOfElements=0;
+	std::size_t m_capacity=0;
 
 
 	
@@ -32,7 +34,13 @@ public:
 
 	T& operator[](const int index);
 	const T& operator[](const int index) const;
+	T& at(int index);
+	
 
+
+	Viktor<T>& operator=(const Viktor& other);
+	Viktor<T>& operator=(Viktor&& other);
+	Viktor<T>& operator=(std::initializer_list<T> ilist);
 };
 //m_nextElement=(T*)m_buffer.get();
 
@@ -93,7 +101,7 @@ Viktor<T>::Viktor(const Viktor& other):
 	m_buffer = std::make_unique<unsigned char[]>(m_capacity * sizeof(T));
 	m_nextElement = reinterpret_cast<T*>(m_buffer.get());
 
-	for (int iii = 0; iii < m_numberOfElements; iii++)
+	for (std::size_t iii = 0; iii < m_numberOfElements; iii++)
 	{
 		*m_nextElement = other[iii];
 		m_nextElement++;
@@ -130,6 +138,66 @@ const T& Viktor<T>::operator[](const int index) const {
 
 }
 
+template<typename T>
+Viktor<T> &Viktor<T>::operator=(const Viktor &other){
+
+	assert(this = *other && "attempt to selfcopy");										//change to if->return *this.
+	m_numberOfElements = other.m_numberOfElements;
+	m_capacity = other.m_capacity;
+	m_buffer.reset();																	//change to reset(std::make_uniue?)
+	m_buffer = std::make_unique<unsigned char[]>(m_capacity * sizeof(T));				//change to reset(std::make_uniue?)
+	m_nextElement = reinterpret_cast<T*>(m_buffer.get());
+
+	for (std::size_t i = 0; i < m_numberOfElements; i++)
+	{
+		*m_nextElement = other[i];
+		m_nextElement++;
+
+	}
+
+
+
+}
+
+template<typename T>
+Viktor<T> &Viktor<T>::operator=(Viktor&& other){
+	std::cout << "move assignment operator is working" << std::endl;
+	m_numberOfElements = other.m_numberOfElements;
+	m_capacity = other.m_capacity;
+	m_buffer = std::move(other.m_buffer);							//delete other.m_nextElement?
+	m_nextElement = other.m_nextElement;
+	return *this;
+}
+
+template<typename T>
+Viktor<T> &Viktor<T>::operator=(std::initializer_list<T> ilist){
+	m_numberOfElements = ilist.size();
+	m_capacity = m_numberOfElements + 2;
+	m_buffer.reset();
+	m_buffer = std::make_unique<unsigned char[]>(m_capacity * sizeof(T));
+	m_nextElement = reinterpret_cast<T*>(m_buffer.get());
+
+	for (auto& element : ilist)
+	{
+		new(m_nextElement) T(element);
+		m_nextElement++;
+
+
+
+	}
+	return *this;
+}\
+
+template<typename T>
+T& Viktor<T>::at(int index) {
+
+	if (index>=m_numberOfElements)
+	{
+		throw std::out_of_range("wrong vector subscript");
+	}
+	return (*this)[index];
+}
+
 
 template <typename T>
 void Viktor<T>::destructElement(int indexOfElement) {
@@ -143,7 +211,7 @@ template <typename T>
 
 	for (int i = 0; i < m_numberOfElements; i++)
 	{
-		std::cout << "Element #" << i << " " <<(*this)[i];
+		std::cout << "Element #" << i << " " << (*this)[i] << std::endl;
 		
 
 

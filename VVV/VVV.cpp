@@ -1,5 +1,7 @@
 ﻿#include <iostream>
 #include "Viktor.h"
+#include <vector>
+#include <string>
 
 class A
 {
@@ -36,59 +38,81 @@ std::ostream& operator<< (std::ostream& out, const A& a)
 
 int main()
 {
-    Viktor<int> a = { 0,1,2,3 };
-    a.memoryAddress(0);
-    a.memoryAddress(1);
-    a.memoryAddress(2);
-    a.memoryAddress(3);
+    //  Viktor<int> a = { 0,1,2,3 };
+    //  a.memoryAddress(0);
+    //  a.memoryAddress(1);
+    //  a.memoryAddress(2);
+    //  a.memoryAddress(3);
+    //
+    //
+    //  Viktor<A> b = { {1,1.1},{2,2.2},{3,3.3},{4,4.4} };
+    //  std::cout << sizeof(A) << std::endl;
+    //  std::cout << "Size of b: " << b.m_numberOfElements << " capacity of b:" << b.m_capacity << std::endl;
+    //  b.memoryAddress(0);
+    //  b.memoryAddress(1);
+    //  b.memoryAddress(2);
+    //  b.memoryAddress(3);
+    //
+    //  Viktor<int> bbb;
+    //
+    //
+    //
+    //
+    //  std::cout << a[2] << std::endl;
+    //
+    //  std::cout << "String tests: " << std::endl;
+    //
+    //  Viktor<std::string> stringTest = { "Armor", "Balance", "Cry" };
+    //
+    //  std::cout << stringTest[0] << std::endl;
+    //  std::cout << stringTest[1] << std::endl;
+    //
+    //  std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+    //
+    //  int a11 = 5;
+    //  int& b11 = a11;
+    //  std::cout << &a11 << std::endl;
+    //  std::cout << &b11 << std::endl;
+    //
+    //  std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+    //
+    //  Viktor<A> c = b;
+    //  std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+    //
+    //  Viktor <int> c1= { 0,1,2,3,4 };
+    //
+    //
+    //  c1.printElements();
+    //
+    //  Viktor <int> c2 = c1;
+    //  
+    //
+    //  std::cout << "++++++++++++++++Start of testing move assignment operator+++++++++++++++++++++++++" << std::endl;
+    //
+   //Viktor <int> c3 = Viktor <int>{ 0, 1, 2, 3, 4 };
+   //
+   //c3.printElements();
+   //
+   //c3 = { 5,6,7,8 };
+   //c3.printElements();
 
-
-    Viktor<A> b = { {1,1.1},{2,2.2},{3,3.3},{4,4.4} };
-    std::cout << sizeof(A) << std::endl;
-    std::cout << "Size of b: " << b.m_numberOfElements << " capacity of b:" << b.m_capacity << std::endl;
-    b.memoryAddress(0);
-    b.memoryAddress(1);
-    b.memoryAddress(2);
-    b.memoryAddress(3);
-
-    Viktor<int> bbb;
-
-
-
-
-    std::cout << a[2] << std::endl;
-
-    std::cout << "String tests: " << std::endl;
-
-    Viktor<std::string> stringTest = { "Armor", "Balance", "Cry" };
-
-    std::cout << stringTest[0] << std::endl;
-    std::cout << stringTest[1] << std::endl;
-
-    std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-
-    int a11 = 5;
-    int& b11 = a11;
-    std::cout << &a11 << std::endl;
-    std::cout << &b11 << std::endl;
-
-    std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-
-    Viktor<A> c = b;
-    std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-
-    Viktor <int> c1= { 0,1,2,3,4 };
-
-
-    c1.printElements();
-
-    Viktor <int> c2 = c1;
     
-
-
-
-    
-
-
+    Viktor<int> c4 = { 1,2,3 };
+    try {
+        // Set element 6
+        c4.at(6) = 666;
+    }
+    catch (std::out_of_range const& exc) {
+        std::cout << exc.what() << '\n';
+    }
 }
+
+    
+
+
+
+    
+
+
+
 
