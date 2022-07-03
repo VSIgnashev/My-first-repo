@@ -34,7 +34,15 @@ public:
 
 	T& operator[](const int index);
 	const T& operator[](const int index) const;
+
 	T& at(int index);
+	const T& at(int index) const;
+
+	T& front();
+	const T& front() const;
+	
+	T& back();
+	const T& back() const;
 	
 
 
@@ -132,7 +140,8 @@ T &Viktor<T>::operator[](const int index) {
 }
 
 template<typename T>
-const T& Viktor<T>::operator[](const int index) const {
+const T& Viktor<T>::operator[](const int index) const 
+{
 	assert(index < m_numberOfElements && "out of range");
 	return *(reinterpret_cast<T*>(m_buffer.get()) + index);
 
@@ -196,7 +205,47 @@ T& Viktor<T>::at(int index) {
 		throw std::out_of_range("wrong vector subscript");
 	}
 	return (*this)[index];
+
 }
+
+
+template<typename T>
+const T& Viktor<T>::at(int index) const
+{
+	if (index >= m_numberOfElements)
+	{
+		throw std::out_of_range("wrong vector subscript");
+	}
+	return (*this)[index];
+
+
+}
+
+template<typename T>
+T& Viktor<T>::front(){
+	return (*this)[0];
+
+}
+
+template<typename T>
+const T& Viktor<T>::front() const {
+	return (*this)[0];
+}
+
+template<typename T>
+T& Viktor<T>::back() {
+
+	return (*this)[m_numberOfElements];
+}
+
+template<typename T>
+const T& Viktor<T>::back() const {
+
+	return (*this)[m_numberOfElements];
+
+}
+
+
 
 
 template <typename T>
