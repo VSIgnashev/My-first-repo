@@ -6,16 +6,129 @@
 #include <cstddef>
 #include <string>
 #include <stdexcept>
+#include <iterator>
+
+template<typename T>
+class Viktor;
+
+
+
+//template<typename T>
+//typename Viktor<T>::iterator operator+(typename Viktor<T>::iterator::difference_type diff, const typename Viktor<T>::iterator& it);
+
+
 
 
 template <typename T>
-
 class Viktor {
 public:
 	std::unique_ptr<unsigned char[]> m_buffer;
 	T* m_nextElement=nullptr;
 	std::size_t m_numberOfElements=0;
 	std::size_t m_capacity=0;
+	using value_type = T;
+	using reference = value_type&;
+
+
+
+	class iterator
+	{
+	public:
+
+		using difference_type = std::ptrdiff_t;
+		using value_type = T;
+		using pointer = T*;
+		using reference = T&;
+		using iterator_category = std::bidirectional_iterator_tag;
+
+
+		T* m_pointer=nullptr;
+		
+
+		
+		
+
+
+		iterator(){};
+		iterator(const Viktor<T>::iterator& it) {
+			m_pointer = it.m_pointer;
+		
+		
+		};
+
+		~iterator(){};
+
+
+		iterator& operator=(const Viktor<T>::iterator other);
+
+
+		T& operator*();
+
+		iterator& operator++();
+		iterator operator++(int);
+
+		iterator& operator--();
+		iterator operator--(int);
+
+		iterator& operator+=(difference_type diff);
+
+		friend typename Viktor<T>::iterator operator+  (typename Viktor<T>::iterator::difference_type diff, const typename Viktor<T>::iterator& it)
+		{
+			typename Viktor<T>::iterator tmp = it;
+			tmp += diff;
+			return tmp;
+		};
+		//
+		//friend const typename Viktor<T>::iterator operator+  (typename Viktor<T>::iterator::difference_type diff, const typename Viktor<T>::iterator& it) const
+		//{
+		//	typename Viktor<T>::iterator tmp = it;
+		//	tmp += diff;
+		//	return tmp;
+		//};
+		//
+		friend typename Viktor<T>::iterator operator+ (const typename Viktor<T>::iterator& it, typename Viktor<T>::iterator::difference_type diff)
+		{
+			typename Viktor<T>::iterator tmp = it;
+			tmp += diff;
+			return tmp;
+
+
+		}
+
+		//friend const typename Viktor<T>::iterator operator+ (const typename Viktor<T>::iterator& it, typename Viktor<T>::iterator::difference_type diff) const
+		//{
+		//	typename Viktor<T>::iterator tmp = it;
+		//	tmp += diff;
+		//	return tmp;
+		//
+		//
+		//}
+
+		iterator& operator-=(difference_type diff);
+		
+		iterator operator-(difference_type diff);
+
+		difference_type operator-(Viktor<T>::iterator it);
+
+		
+
+
+		void tryToAccesNumberOfElements() //tmp
+		{
+
+			std::cout << reinterpret_cast<Viktor<int>*>(m_pointer)->m_numberOfElements << std::endl;
+
+		};
+
+
+	private:
+
+	};
+
+	
+
+
+
 
 
 	
@@ -43,6 +156,13 @@ public:
 	
 	T& back();
 	const T& back() const;
+	
+	T* data();
+	const T* data() const;
+
+	iterator begin();
+	iterator end();
+	
 	
 
 
@@ -152,8 +272,7 @@ Viktor<T> &Viktor<T>::operator=(const Viktor &other){
 
 	assert(this = *other && "attempt to selfcopy");										//change to if->return *this.
 	m_numberOfElements = other.m_numberOfElements;
-	m_capacity = other.m_capacity;
-	m_buffer.reset();																	//change to reset(std::make_uniue?)
+	m_capacity = other.m_capacity;														//change to reset(std::make_uniue?)
 	m_buffer = std::make_unique<unsigned char[]>(m_capacity * sizeof(T));				//change to reset(std::make_uniue?)
 	m_nextElement = reinterpret_cast<T*>(m_buffer.get());
 
@@ -245,6 +364,187 @@ const T& Viktor<T>::back() const {
 
 }
 
+template<typename T>
+T* Viktor<T>::data()
+{
+	return reinterpret_cast<T*>(m_buffer.get());
+
+
+}
+
+template<typename T>
+const T* Viktor<T>::data() const
+{
+	return m_buffer.get();
+
+}
+
+
+template<typename T>
+typename Viktor<T>::iterator Viktor<T>::begin()
+{
+	Viktor<T>::iterator tmp;
+	tmp.m_pointer = reinterpret_cast<T*>(m_buffer.get());
+	return tmp;
+
+}
+
+template<typename T>
+typename Viktor<T>::iterator Viktor<T>::end()
+{
+	Viktor<T>::iterator tmp;
+	tmp.m_pointer = (reinterpret_cast<T*>(m_buffer.get())) + m_numberOfElements;
+	return tmp;
+
+
+
+}
+
+
+
+
+
+
+
+template<typename T>
+typename Viktor<T>::iterator& Viktor<T>::iterator::operator=(const Viktor<T>::iterator other) {
+	m_pointer = other.m_pointer;
+	return *this;
+
+}
+
+
+template<typename T>
+T& Viktor<T>::iterator::operator*() 
+{
+	return *m_pointer;
+}
+
+
+
+
+
+
+template<typename T>
+typename Viktor<T>::iterator& Viktor<T>::iterator::operator++() {
+
+	//assert( (reinterpret_cast<T*>(m_buffer.get())+m_numberOfElements) )
+	m_pointer++;
+	return *this;
+
+
+ }
+
+template<typename T>
+typename Viktor<T>::iterator Viktor<T>::iterator::operator++(int) {
+
+	Viktor<T>::iterator tmp = *(this);
+	
+	++m_pointer;	
+	return tmp;
+
+
+}
+
+
+
+template<typename T>
+typename Viktor<T>::iterator& Viktor<T>::iterator::operator--() {
+
+	m_pointer--;
+	return *this;
+
+
+}
+
+template<typename T>
+typename Viktor<T>::iterator Viktor<T>::iterator::operator--(int) {
+	
+	Viktor<T>::iterator tmp = *(this);
+	m_pointer--;
+	
+	return tmp;
+
+
+}
+
+template<typename T>
+typename Viktor<T>::iterator& Viktor<T>::iterator::operator+=(difference_type diff)
+{
+	difference_type tmp = diff;
+	if (diff >= 0)
+		while (diff--)
+			++(*this);
+	else
+		while (diff++)
+			--(*this);
+	return *this;
+}
+
+template<typename T>
+typename Viktor<T>::iterator& Viktor<T>::iterator::operator-=(Viktor<T>::iterator::difference_type diff) {
+
+	return *(this) += -diff;
+
+
+
+};
+
+template<typename T>
+typename Viktor<T>::iterator Viktor<T>::iterator::operator-(Viktor<T>::iterator::difference_type diff) {
+	Viktor<T>::iterator tmp = *(this);
+	return tmp -= diff;
+};
+
+template<typename T>
+typename Viktor<T>::iterator::difference_type Viktor<T>::iterator::operator-(Viktor<T>::iterator it) {
+	
+	return this->m_pointer - it.m_pointer;
+
+	
+
+
+}
+
+
+
+
+
+//template<typename T>
+//typename Viktor<T>::iterator operator+ (typename Viktor<T>::iterator::difference_type diff, const typename Viktor<T>::iterator& it)
+//{
+//
+//		typename Viktor<T>::iterator tmp = it;
+//		tmp += diff;
+//		return tmp;
+//
+//}
+
+//template<typename T>
+//typename Viktor<T>::iterator operator+(typename Viktor<T>::iterator::difference_type diff, const typename Viktor<T>::iterator& it)
+//{
+//	Viktor<T>::iterator tmp = it;
+//	tmp += diff;
+//	return tmp;
+//
+//
+//}
+
+
+
+
+//friend iterator operator+(const Viktor<T>::iterator& it, difference_type diff);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -281,3 +581,20 @@ template <typename T>
 //
 //dynamic_cast<B*> prt; // превращает поинтор на родителя в поинтор на ребёнка
 //dynamic_cast<B*> ptr2;
+
+
+ //using value_type = T;
+ //
+ //template< class Iter >
+ //struct iterator_traits;
+ //{
+ //
+//		difference_type	Iter::difference_type
+//		 value_type	Iter::value_type
+//		 pointer	Iter::pointer
+//		 reference	Iter::reference
+//		 iterator_category	Iter::iterator_category
+ //
+ //
+ //
+ //}

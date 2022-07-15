@@ -96,19 +96,137 @@ int main()
    //c3 = { 5,6,7,8 };
    //c3.printElements();
 
-    
-    Viktor<int> c4 = { 1,2,3 };
-    try {
-        // Set element 6
-        c4.at(6) = 666;
-    }
-    catch (std::out_of_range const& exc) {
-        std::cout << exc.what() << '\n';
-    }
+
+    //Viktor<int> c4 = { 1,2,3 };
+    //Viktor<int>::iterator c5;
+    //Viktor<int>::iterator v1;
+    //v1.m_pointer=reinterpret_cast<int*>(c4.m_buffer.get());
+    //c5 = v1;
+    //
+    //for (size_t i = 0; i < 3; i++)
+    //{
+    //    std::cout << *v1++ << std::endl;
+    //    
+    //
+    //
+    //}
+    //
+    //
+    //for (size_t i = 0; i < 3; i++)
+    //{
+    //    std::cout << *++c5 << std::endl;
+    //
+    //
+    //
+    //}
+
+    //std::vector<int> a = { 0,1,2,3 };
+    //std::vector<int>::iterator b = a.begin();
+    //std::cout << *b--;
+    //for (size_t i = 0; i < 5; i++)
+    //{
+    //    std::cout << *b++;
+    //}
+
+    //Viktor<int> a = { 0,1,2,3,4 };
+    ////std::cout << "start: \n";
+    ////for (size_t i = 0; i < 5; i++)
+    ////{
+    ////    std::cout << (reinterpret_cast<int*>(a.m_buffer.get())+i) << std::endl;
+    ////}
+    //Viktor<int>::iterator b = reinterpret_cast<int*>(a.m_buffer.get());
+    //
+    //b.tryToAccesNumberOfElements();
+
+//  std::vector<int> a = { 0,1,2,3,4 };
+//  std::vector<int>::iterator b;
+
+  //Viktor<int> a = { 0,1,2,3,4,5 };
+  //Viktor<int>::iterator b;
+  //Viktor<int>::iterator b1;
+  //Viktor<int>::iterator b2;
+  //
+  //b.m_pointer = a.data();
+  //b1 = b;
+
+
+
+
+
+   //for (size_t i = 0; i < 6; i++)
+   //{
+   //    std::cout << "*b[" << i << "] = " << *b++ << std::endl;
+   //}
+   //std::cout << b1.m_pointer << std::endl;
+   //for (size_t i = 0; i < 5; i++)
+   //{
+   //    std::cout << "*b1[" << i << "] = " << *b1++ << std::endl;
+   //    
+   //}
+   //std::cout << b1.m_pointer << std::endl;
+   //b2 = b1;
+   //std::cout << b2.m_pointer << std::endl;
+   //
+   //std::cout << *b2;
+   // 
+   //std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+   //std::cout << sizeof(std::vector<int>::iterator);
+
+
+  //Viktor<int> a = { 0,1,2,3,4,5 };
+  //Viktor<int>::iterator b = a.begin();
+  //
+  ///for (size_t i = 0; i < 6; i++)
+  ///{
+  ///    std::cout << *b++ << std::endl;
+  ///}
+  //b += 2;
+  //std::cout << *(2+b) << std::endl;
+   //std::cout << *(2+b) << std::endl;
+
+
+   //std::cout << *b << std::endl;
+
+
+    //long long a[5];
+    //for (size_t i = 0; i < 5; i++)
+    //{
+    //    std::cout << "Memeory adress of element #" << i << ": " << &(a[i]) << std::endl;
+    //
+    //
+    //}
+    //
+    //std::cout << "Memory of 4-3: " << (&(a[3])) - (&(a[4])) << std::endl;
+    //
+    Viktor<int> a = { 0,1,2,3,4,5 };
+    Viktor<int>::iterator it1 = a.begin();
+    Viktor<int>::iterator it2 = it1;
+    std::cout << "it1:" << *it1 << std::endl;
+    std::cout << "it2:" << *it2 << std::endl;
+    it2++;
+    std::cout << "it2 after ++:" << *it2 << std::endl;
+    std::cout << "diff1:" << it2 - it1 << std::endl;
+    std::cout << "diff1.1:" << it1 - it2 << std::endl;
+    it2++;
+    std::cout << "diff 2:" << it2 - it1 << std::endl;
+    std::cout << "diff 2.1" << it1 - it2 << std::endl;
+
 }
 
-    
+            
+    //}
 
+//template<typename T>
+//typename T::value_type foo(T& vectorr) // когда ругается перед возврат.знач писать typename
+//{
+//
+//
+//    T::value_type x;
+//    
+//    return x;
+//
+//
+//}
 
 
     
