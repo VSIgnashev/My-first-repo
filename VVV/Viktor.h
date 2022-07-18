@@ -62,7 +62,13 @@ public:
 		iterator& operator=(const Viktor<T>::iterator other);
 
 
+		bool operator==(iterator& it);
+		bool operator!=(iterator& it);
+
+
 		T& operator*();
+
+		void operator->(std::string name);
 
 		iterator& operator++();
 		iterator operator++(int);
@@ -109,6 +115,14 @@ public:
 		iterator operator-(difference_type diff);
 
 		difference_type operator-(Viktor<T>::iterator it);
+
+		iterator& operator[](difference_type diff);
+
+
+		bool operator<(Viktor<T>::iterator& it);
+		bool operator>(Viktor<T>::iterator& it);
+		bool operator>=(Viktor<T>::iterator& it);
+		bool operator<=(Viktor<T>::iterator& it);
 
 		
 
@@ -421,7 +435,24 @@ T& Viktor<T>::iterator::operator*()
 }
 
 
+//template<typename T>
+//void Viktor<T>::iterator::operator->(std::string name) {
+//
+//	(*this).name;
+//}
 
+
+template<typename T>
+bool Viktor<T>::iterator::operator==(Viktor<T>::iterator & it) {
+	return ((this->m_pointer) == it.m_pointer);
+	
+}
+
+template<typename T>
+bool Viktor<T>::iterator::operator!=(Viktor<T>::iterator & it) {
+
+	return !((*this) == it);
+}
 
 
 
@@ -503,6 +534,39 @@ typename Viktor<T>::iterator::difference_type Viktor<T>::iterator::operator-(Vik
 
 	
 
+
+}
+
+template<typename T>
+typename Viktor<T>::iterator& Viktor<T>::iterator::operator[](difference_type diff)
+{
+	return *((*this) + diff);
+
+
+}
+
+
+template<typename T>
+bool Viktor<T>::iterator::operator<(Viktor<T>::iterator& it) {
+
+	return it - (*this) > 0;
+}
+
+template<typename T>
+bool Viktor<T>::iterator::operator>(Viktor<T>::iterator& it) {
+	return it < (*this);
+}
+
+template<typename T>
+bool Viktor<T>::iterator::operator>=(Viktor<T>::iterator& it) {
+
+	return !((*this) < it);
+}
+
+template<typename T>
+bool Viktor<T>::iterator::operator<=(Viktor<T>::iterator& it) {
+	
+	return !((*this) > it);
 
 }
 
