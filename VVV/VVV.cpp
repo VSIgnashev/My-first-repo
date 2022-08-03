@@ -198,18 +198,33 @@ int main()
     //
     //std::cout << "Memory of 4-3: " << (&(a[3])) - (&(a[4])) << std::endl;
     //
-    Viktor<int> a = { 0,1,2,3,4,5 };
-    Viktor<int>::iterator it1 = a.begin();
-    Viktor<int>::iterator it2 = it1;
-    std::cout << "it1:" << *it1 << std::endl;
-    std::cout << "it2:" << *it2 << std::endl;
-    it2++;
-    std::cout << "it2 after ++:" << *it2 << std::endl;
-    std::cout << "diff1:" << it2 - it1 << std::endl;
-    std::cout << "diff1.1:" << it1 - it2 << std::endl;
-    it2++;
-    std::cout << "diff 2:" << it2 - it1 << std::endl;
-    std::cout << "diff 2.1" << it1 - it2 << std::endl;
+    //Viktor<int> a = { 0,1,2,3,4,5 };
+    //Viktor<int>::iterator it1 = a.begin();
+    //Viktor<int>::iterator it2 = it1;
+    //std::cout << "it1:" << *it1 << std::endl;
+    //std::cout << "it2:" << *it2 << std::endl;
+    //it2++;
+    //std::cout << "it2 after ++:" << *it2 << std::endl;
+    //std::cout << "diff1:" << it2 - it1 << std::endl;
+    //std::cout << "diff1.1:" << it1 - it2 << std::endl;
+    //it2++;
+    //std::cout << "diff 2:" << it2 - it1 << std::endl;
+    //std::cout << "diff 2.1" << it1 - it2 << std::endl;
+
+//Viktor<int> a = { 0,1,2,3,4,5,6 };
+//Viktor<int>::iterator b = a.begin();
+////std::cout << b << std::endl;
+//std::cout << *b;
+//*b = 77;
+//std::cout << *b;
+//std::vector<int> a = { 0,1,2,3,4,5,6,7,8,9 };
+//std::vector<int>::const_iterator b = a.begin();
+//*b = 88;
+
+
+//Viktor<int> a = { 0,1,2,3 };
+//Viktor<int>::const_iterator b = a.begin();
+//*b = 77;
 
 }
 

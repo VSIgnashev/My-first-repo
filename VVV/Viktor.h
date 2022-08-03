@@ -125,6 +125,87 @@ public:
 
 	};
 
+	class const_iterator {
+	public:
+
+		using difference_type = std::ptrdiff_t;
+		using value_type = T;
+		using pointer = T*;
+		using reference = T&;
+		using iterator_category = std::bidirectional_iterator_tag;
+
+
+		const T* m_pointer = nullptr;
+
+		const_iterator(){};
+		const_iterator(const Viktor<T>::iterator& it) {
+			m_pointer = it.m_pointer;
+
+
+		};
+		const_iterator(const Viktor<T>::const_iterator& it) {
+			m_pointer = it.m_pointer;
+
+
+		};
+
+		~const_iterator() {};
+			
+		const_iterator& operator=(const Viktor<T>::const_iterator other);
+
+
+		const T& operator*();
+
+		const_iterator& operator++();
+		const_iterator operator++(int);
+
+		const_iterator& operator--();
+		const_iterator operator--(int);
+
+		const_iterator& operator+=(difference_type diff);
+
+		friend typename Viktor<T>::const_iterator operator+  (typename Viktor<T>::const_iterator::difference_type diff, const typename Viktor<T>::const_iterator& it)
+		{
+			typename Viktor<T>::const_iterator tmp = it;
+			tmp += diff;
+			return tmp;
+		};
+		//
+		//friend const typename Viktor<T>::iterator operator+  (typename Viktor<T>::iterator::difference_type diff, const typename Viktor<T>::iterator& it) const
+		//{
+		//	typename Viktor<T>::iterator tmp = it;
+		//	tmp += diff;
+		//	return tmp;
+		//};
+		//
+		friend typename Viktor<T>::const_iterator operator+ (const typename Viktor<T>::const_iterator& it, typename Viktor<T>::const_iterator::difference_type diff)
+		{
+			typename Viktor<T>::const_iterator tmp = it;
+			tmp += diff;
+			return tmp;
+
+
+		}
+
+		//friend const typename Viktor<T>::iterator operator+ (const typename Viktor<T>::iterator& it, typename Viktor<T>::iterator::difference_type diff) const
+		//{
+		//	typename Viktor<T>::iterator tmp = it;
+		//	tmp += diff;
+		//	return tmp;
+		//
+		//
+		//}
+
+		const_iterator& operator-=(difference_type diff);
+
+		const_iterator operator-(difference_type diff);
+
+		difference_type operator-(Viktor<T>::const_iterator it);
+
+	
+
+
+	};
 	
 
 
@@ -314,7 +395,7 @@ Viktor<T> &Viktor<T>::operator=(std::initializer_list<T> ilist){
 
 	}
 	return *this;
-}\
+}
 
 template<typename T>
 T& Viktor<T>::at(int index) {
@@ -510,6 +591,7 @@ typename Viktor<T>::iterator::difference_type Viktor<T>::iterator::operator-(Vik
 
 
 
+
 //template<typename T>
 //typename Viktor<T>::iterator operator+ (typename Viktor<T>::iterator::difference_type diff, const typename Viktor<T>::iterator& it)
 //{
@@ -539,7 +621,112 @@ typename Viktor<T>::iterator::difference_type Viktor<T>::iterator::operator-(Vik
 
 
 
+/// <summary>
+/// //////////////////////////////////////////////////////////////////////////////////////////////////
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <returns></returns>
 
+
+template<typename T>
+typename Viktor<T>::const_iterator& Viktor<T>::const_iterator::operator=(const Viktor<T>::const_iterator other) {
+	m_pointer = other.m_pointer;
+	return *this;
+
+}
+
+
+template<typename T>
+const T& Viktor<T>::const_iterator::operator*()
+{
+	return *m_pointer;
+}
+
+
+
+
+
+
+template<typename T>
+typename Viktor<T>::const_iterator& Viktor<T>::const_iterator::operator++() {
+
+	//assert( (reinterpret_cast<T*>(m_buffer.get())+m_numberOfElements) )
+	m_pointer++;
+	return *this;
+
+
+}
+
+template<typename T>
+typename Viktor<T>::const_iterator Viktor<T>::const_iterator::operator++(int) {
+
+	Viktor<T>::const_iterator tmp = *(this);
+
+	++m_pointer;
+	return tmp;
+
+
+}
+
+
+
+template<typename T>
+typename Viktor<T>::const_iterator& Viktor<T>::const_iterator::operator--() {
+
+	m_pointer--;
+	return *this;
+
+
+}
+
+template<typename T>
+typename Viktor<T>::const_iterator Viktor<T>::const_iterator::operator--(int) {
+
+	Viktor<T>::const_iterator tmp = *(this);
+	m_pointer--;
+
+	return tmp;
+
+
+}
+
+template<typename T>
+typename Viktor<T>::const_iterator& Viktor<T>::const_iterator::operator+=(difference_type diff)
+{
+	difference_type tmp = diff;
+	if (diff >= 0)
+		while (diff--)
+			++(*this);
+	else
+		while (diff++)
+			--(*this);
+	return *this;
+}
+
+template<typename T>
+typename Viktor<T>::const_iterator& Viktor<T>::const_iterator::operator-=(Viktor<T>::const_iterator::difference_type diff) {
+
+	return *(this) += -diff;
+
+
+
+};
+
+template<typename T>
+typename Viktor<T>::const_iterator Viktor<T>::const_iterator::operator-(Viktor<T>::const_iterator::difference_type diff) {
+	Viktor<T>::const_iterator tmp = *(this);
+	return tmp -= diff;
+};
+
+template<typename T>
+typename Viktor<T>::const_iterator::difference_type Viktor<T>::const_iterator::operator-(Viktor<T>::const_iterator it) {
+
+	return this->m_pointer - it.m_pointer;
+
+
+
+
+}
 
 
 
