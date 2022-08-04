@@ -1,2 +1,6 @@
 PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.31.31103:TargetPlatformVersion=10.0.19041.0:
+<<<<<<< HEAD
 Debug|x64|C:\Vasily\VVV\My-first-repo\|
+=======
+Debug|x64|D:\Vasily\VVV\My-first-repo\|
+>>>>>>> 95b059a286397e01cfaa6be69043b727b161076f

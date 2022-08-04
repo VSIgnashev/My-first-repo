@@ -211,6 +211,7 @@ int main()
     //std::cout << "diff 2:" << it2 - it1 << std::endl;
     //std::cout << "diff 2.1" << it1 - it2 << std::endl;
 
+<<<<<<< HEAD
 //Viktor<int> a = { 0,1,2,3,4,5,6 };
 //Viktor<int>::iterator b = a.begin();
 ////std::cout << b << std::endl;
@@ -225,6 +226,48 @@ int main()
 //Viktor<int> a = { 0,1,2,3 };
 //Viktor<int>::const_iterator b = a.begin();
 //*b = 77;
+=======
+
+//  std::vector<int> a = { 0,1,2,3,4,5 };
+//  std::vector<int>::iterator b = a.begin();
+//  std::cout << b[2] << std::endl;
+//  std::cout << *b << std::endl;
+
+
+Viktor<int> a = { 0,1,2,3,4,5,6 };
+Viktor<int>::iterator b = a.begin();
+Viktor<int>::iterator b1 = a.begin();
+Viktor<int>::iterator b2 = a.end();
+
+
+std::vector<int> c1 = { 0,1,2,3 };
+std::vector<int> c2 = { 0,1,2,3,4 };
+std::vector<int>::iterator c3 = c1.begin();
+std::vector<int>::iterator c4 = c2.begin();
+std::vector<int>::iterator c5 = c3;
+c5++;
+
+
+
+std::cout << c3->difference_type;
+if (c4==c5)
+{
+    std::cout << "Vecotr its are equal" << std::endl;
+}
+
+
+if (b==b1)
+{
+    std::cout << "They are equal";
+}
+
+if (b!=b2)
+{
+    std::cout << "\n They are not equal" << std::endl;;
+}
+
+
+>>>>>>> 95b059a286397e01cfaa6be69043b727b161076f
 
 }
 

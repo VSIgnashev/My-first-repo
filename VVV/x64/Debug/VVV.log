@@ -1,2 +1,6 @@
 ﻿  VVV.cpp
+<<<<<<< HEAD
 C:\Vasily\VVV\My-first-repo\VVV\VVV.cpp(227,1): error C3892: b: невозможно присваивать значения переменной, которая объявлена как константа
+=======
+  VVV.vcxproj -> D:\Vasily\VVV\My-first-repo\x64\Debug\VVV.exe
+>>>>>>> 95b059a286397e01cfaa6be69043b727b161076f
