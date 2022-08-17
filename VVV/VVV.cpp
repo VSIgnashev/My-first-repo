@@ -2,6 +2,7 @@
 #include "Viktor.h"
 #include <vector>
 #include <string>
+#include "reverse_iterator.h"
 
 class A
 {
@@ -23,7 +24,9 @@ public:
     };
 
 
-    
+    void printHi() { 
+        std::cout << "Elemnt # " << a << std::endl;
+        std::cout << "Hi \n"; };
 
     friend std::ostream& operator<< (std::ostream& out, const A& a);
 };
@@ -211,7 +214,7 @@ int main()
     //std::cout << "diff 2:" << it2 - it1 << std::endl;
     //std::cout << "diff 2.1" << it1 - it2 << std::endl;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 //Viktor<int> a = { 0,1,2,3,4,5,6 };
 //Viktor<int>::iterator b = a.begin();
 ////std::cout << b << std::endl;
@@ -226,7 +229,7 @@ int main()
 //Viktor<int> a = { 0,1,2,3 };
 //Viktor<int>::const_iterator b = a.begin();
 //*b = 77;
-=======
+//=======
 
 //  std::vector<int> a = { 0,1,2,3,4,5 };
 //  std::vector<int>::iterator b = a.begin();
@@ -234,40 +237,90 @@ int main()
 //  std::cout << *b << std::endl;
 
 
-Viktor<int> a = { 0,1,2,3,4,5,6 };
-Viktor<int>::iterator b = a.begin();
-Viktor<int>::iterator b1 = a.begin();
-Viktor<int>::iterator b2 = a.end();
+//Viktor<int> a = { 0,1,2,3,4,5,6 };
+//Viktor<int>::iterator b = a.begin();
+//Viktor<int>::iterator b1 = a.begin();
+//Viktor<int>::iterator b2 = a.end();
+//
+//
+//std::vector<int> c1 = { 0,1,2,3 };
+//std::vector<int> c2 = { 0,1,2,3,4 };
+//std::vector<int>::iterator c3 = c1.begin();
+//std::vector<int>::iterator c4 = c2.begin();
+//std::vector<int>::iterator c5 = c3;
+//c5++;
+//
+//
+//
+//std::cout << c3->difference_type;
+//if (c4==c5)
+//{
+//    std::cout << "Vecotr its are equal" << std::endl;
+//}
+//
+//
+//if (b==b1)
+//{
+//    std::cout << "They are equal";
+//}
+//
+//if (b!=b2)
+//{
+//    std::cout << "\n They are not equal" << std::endl;;
+//}
+//
+//
+//>>>>>>> 95b059a286397e01cfaa6be69043b727b161076f
+
+//const int a1[]{ 0, 1, 2 };
+//int a2[]{ 0, 1, 2, 3 };
+//short a3[]{ 40, 41, 42 };
+//
+//std::reverse_iterator<const int*> it1{ std::crbegin(a1) };
+//it1 = std::reverse_iterator<int*>{ std::rbegin(a2) }; // OK
+////  it1 = std::reverse_iterator<short*>{ std::rbegin(a3) }; // compilation error:
+//                                                            // incompatible pointer types
+//std::reverse_iterator<short const*> it2{ nullptr };
+//it2 = std::rbegin(a3); // OK
+////  it2 = std::begin(a3); // compilation error: no viable overloaded '='
+//std::cout << *it2 << '\n';
+
+std::vector<int> a1{ 0,1,2,3,4,5,6 };
+
+std::vector<int>::iterator it1 = a1.begin()+3;
+
+reverse_iterator<std::vector<int>::iterator> rit1 {it1};
+
+std::cout << *it1 << std::endl;
+std::cout << &it1 << std::endl;
+std::cout << *rit1<< std::endl;
+
+std::vector<A> aa1{ {1,1.1},{2,2.2},{3,3.3},{4,4.4} };
+
+std::vector<A>::iterator it{ aa1.begin() + 2 };
+std::cout << *it << std::endl;
+reverse_iterator<std::vector<A>::iterator> rit{ it };
+std::cout << *rit << std::endl;
+
+rit.base()++;
+std::cout << *rit << std::endl;
 
 
-std::vector<int> c1 = { 0,1,2,3 };
-std::vector<int> c2 = { 0,1,2,3,4 };
-std::vector<int>::iterator c3 = c1.begin();
-std::vector<int>::iterator c4 = c2.begin();
-std::vector<int>::iterator c5 = c3;
-c5++;
+
+
+//std::vector<int>::iterator it1 = a1.begin()+3;
+//
+//std::cout << "*it1 = " << *it1 << std::endl;
+//std::reverse_iterator < std::vector<int>::iterator>  rit {it1};
+//std::cout << "*rit1 = " << *rit << std::endl;
+//std::cout << "rit.base()" << *rit.base() << std::endl;
+//
+//rit++;
+//std::cout << "*rit1++ =" << *rit << std::endl;
+//std::cout << "rit.base() = " << *rit.base() << std::endl;
 
 
 
-std::cout << c3->difference_type;
-if (c4==c5)
-{
-    std::cout << "Vecotr its are equal" << std::endl;
-}
-
-
-if (b==b1)
-{
-    std::cout << "They are equal";
-}
-
-if (b!=b2)
-{
-    std::cout << "\n They are not equal" << std::endl;;
-}
-
-
->>>>>>> 95b059a286397e01cfaa6be69043b727b161076f
 
 }
 

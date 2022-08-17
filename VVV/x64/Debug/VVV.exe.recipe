@@ -2,11 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-<<<<<<< HEAD
-      <FullPath>C:\Vasily\VVV\My-first-repo\x64\Debug\VVV.exe</FullPath>
-=======
-      <FullPath>D:\Vasily\VVV\My-first-repo\x64\Debug\VVV.exe</FullPath>
->>>>>>> 95b059a286397e01cfaa6be69043b727b161076f
+      <FullPath>D:\IT\MyProjects\VVV\x64\Debug\VVV.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

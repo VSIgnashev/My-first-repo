@@ -68,7 +68,7 @@ public:
 
 		T& operator*();
 
-		void operator->(std::string name);
+		void operator->();
 
 		iterator& operator++();
 		iterator operator++(int);
@@ -217,6 +217,15 @@ public:
 		difference_type operator-(Viktor<T>::const_iterator it);
 
 	
+
+
+	};
+
+	class reverse_iterator
+	{
+
+
+
 
 
 	};
